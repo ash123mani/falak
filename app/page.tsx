@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { getAllBlogPosts } from '@/lib/contentful'
 import BlogList from '@/components/blog-list'
 import { formatDate } from '@/lib/utils'
@@ -20,7 +21,9 @@ export default async function HomePage() {
           Thoughts on front-end development, React, and the web platform
         </p>
       </div>
-      <BlogList posts={formatted} />
+      <Suspense fallback={<div className="text-center py-12 text-[var(--text-secondary)]">Loading...</div>}>
+        <BlogList posts={formatted} />
+      </Suspense>
     </div>
   )
 }
