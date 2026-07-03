@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --color-primary: #0a0a0a;
+  --color-primary-medium: rgba(10, 10, 10, 0.7);
+  --color-primary-light: rgba(10, 10, 10, 0.45);
+  --text-body: #1e1e2e;
+  --text-secondary: #52525b;
+  --link-color: #2563eb;
+  --link-hover: #1d4ed8;
+  --tag-bg: #f0f0f0;
+  --blockquote-border: #4a9eff;
+  --blockquote-bg: #f0f6ff;
+  --border-color: #e4e4e7;
+  --border-color-bold: #d4d4d8;
+  --button-background: #0a0a0a;
+  --page-bg: #fafafa;
+  --card-bg: #ffffff;
+  --code-block-bg: #f5f5f5;
+  --code-inline-bg: #f4f4f8;
+  --code-inline-text: #e83e8c;
+  --layout-max-width: 1120px;
+  --header-height: 80px;
+
+  --font-sm: 1.2rem;
+  --font-base: 1.6rem;
+  --font-lg: 1.8rem;
+  --font-xl: 2.4rem;
+  --font-2xl: 3.2rem;
+
+  --space-xs: 0.4rem;
+  --space-sm: 0.8rem;
+  --space-md: 1.6rem;
+  --space-lg: 3.2rem;
+  --space-xl: 6.4rem;
+}
+
+.dark {
+  --color-primary: #f1f5f9;
+  --color-primary-medium: rgba(241, 245, 249, 0.7);
+  --color-primary-light: rgba(241, 245, 249, 0.45);
+  --text-body: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --link-color: #60a5fa;
+  --link-hover: #93bbfc;
+  --tag-bg: #1e293b;
+  --blockquote-border: #3b82f6;
+  --blockquote-bg: #0f172a;
+  --border-color: #1e293b;
+  --border-color-bold: #334155;
+  --button-background: #f1f5f9;
+  --page-bg: #0b0b0f;
+  --card-bg: #12121a;
+  --code-block-bg: #1a1a2e;
+  --code-inline-bg: #1e1e2e;
+  --code-inline-text: #f472b6;
+}
+
+@theme inline {
+  --font-sans: 'Poppins', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', Menlo, Courier, monospace;
+  --color-background: var(--page-bg);
+  --color-foreground: var(--text-body);
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.75;
+  font-variant-ligatures: none;
+  color: var(--text-body);
+  background: var(--page-bg);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--border-color-bold);
+  border-radius: 3px;
+}
+
+::selection {
+  background: #2563eb;
+  color: white;
+}
+
+h1 { font-size: 3.2rem; line-height: 1.25; font-weight: 700; letter-spacing: -0.03em; }
+h2 { font-size: 2.4rem; line-height: 1.3; font-weight: 600; letter-spacing: -0.02em; }
+h3 { font-size: 2rem; line-height: 1.35; font-weight: 600; }
+h4 { font-size: 1.6rem; line-height: 1.4; font-weight: 500; }
+h5 { font-size: 1.3rem; line-height: 1.4; font-weight: 500; }
+h6 { font-size: 1.1rem; line-height: 1.4; font-weight: 500; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 1.6rem 0;
+  color: var(--color-primary);
+}
+
+p {
+  margin: 0 0 1.6rem 0;
+  font-size: 1.6rem;
+  line-height: 1.75;
+  color: var(--text-body);
+}
+
+ul, ol {
+  margin: 0 0 1.6rem 0;
+  padding-left: 2rem;
+}
+
+li {
+  font-size: 1.6rem;
+  line-height: 1.75;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+@media screen and (max-width: 768px) {
+  h1 { font-size: 2.4rem; }
+  h2 { font-size: 1.8rem; }
+  h3 { font-size: 1.6rem; }
+  h4 { font-size: 1.4rem; }
+  h5 { font-size: 1.2rem; }
+  h6 { font-size: 1rem; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
