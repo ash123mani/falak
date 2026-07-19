@@ -43,7 +43,7 @@ function parseBlogPost(item: any): BlogPost {
   const fields = item.fields
   return {
     id: item.sys.id,
-    slug: fields.slug || '',
+    slug: fields.slug ? fields.slug.replace(/^\//, '') : '',
     title: fields.homepage || '',
     body: fields.body,
     publishedDate: fields.publishedDate || '',
@@ -52,6 +52,7 @@ function parseBlogPost(item: any): BlogPost {
     excerpt: fields.excerpt || '',
     seoTitle: fields.seoTitle || undefined,
     seoDescription: fields.seoDescription || undefined,
+    updatedDate: fields.updatedDate || undefined,
   }
 }
 
@@ -137,7 +138,44 @@ export async function getAllAboutDetailSlugs(): Promise<string[]> {
     content_type: 'aboutDetails',
     select: ['fields.slug'],
   })
-
   const slugs = entries.items.map((item) => item.fields.slug).filter(Boolean) as string[]
   return slugs.map((s) => (s.startsWith('/') ? s.slice(1) : s))
+}
+
+export async function getRelatedPosts(currentSlug: string, limit = 3): Promise<BlogPost[]> {
+  const allPosts = await getAllBlogPosts()
+  const current = allPosts.find((p) => p.slug === currentSlug)
+  if (!current) return []
+
+  const currentTags = current.tags.split(' ').filter(Boolean)
+
+  const scored = allPosts
+    .filter((p) => p.slug !== currentSlug)
+    .map((p) => {
+      const postTags = p.tags.split(' ').filter(Boolean)
+      const score = postTags.filter((t) => currentTags.includes(t)).length
+      return { post: p, score }
+    })
+    .filter((s) => s.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+
+  return scored.map((s) => ({
+    ...s.post,
+    publishedDate: s.post.publishedDate,
+  }))
+}
+
+export async function getAdjacentPosts(
+  currentSlug: string,
+): Promise<{ prev: BlogPost | null; next: BlogPost | null }> {
+  const allPosts = await getAllBlogPosts()
+  const idx = allPosts.findIndex((p) => p.slug === currentSlug)
+
+  if (idx === -1) return { prev: null, next: null }
+
+  return {
+    prev: idx < allPosts.length - 1 ? allPosts[idx + 1] : null,
+    next: idx > 0 ? allPosts[idx - 1] : null,
+  }
 }

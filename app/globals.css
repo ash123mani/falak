@@ -163,3 +163,76 @@ a:hover {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+.shiki-root.line-numbers {
+  counter-reset: line-number;
+}
+
+.shiki-root.line-numbers .line {
+  padding-left: 1rem;
+}
+
+.shiki-root.line-numbers .line::before {
+  counter-increment: line-number;
+  content: counter(line-number);
+  display: inline-block;
+  width: 3.2rem;
+  min-width: 3.2rem;
+  text-align: right;
+  margin-right: 1.2rem;
+  color: #636d83;
+  font-size: 1.2rem;
+  user-select: none;
+}
+
+@media print {
+  body {
+    background: white;
+    color: black;
+    font-size: 12pt;
+  }
+
+  header, footer, .fixed, [class*="sticky"],
+  .reading-progress, #gitalk-container,
+  button, .back-to-top,
+  nav:not([aria-label="breadcrumb"]) {
+    display: none !important;
+  }
+
+  article {
+    max-width: 100% !important;
+  }
+
+  pre, code {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  img {
+    max-width: 100% !important;
+    break-inside: avoid;
+  }
+
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+  }
+
+  .shiki-root,
+  pre[class*="language-"] {
+    border: 1px solid #ddd !important;
+    background: #fafafa !important;
+  }
+
+  .shiki-root .line::before {
+    color: #aaa !important;
+  }
+
+  @page {
+    margin: 2cm;
+  }
+}

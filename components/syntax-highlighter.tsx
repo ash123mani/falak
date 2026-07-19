@@ -101,8 +101,13 @@ export function SyntaxHighlighter({
       <div className="overflow-x-auto">
         {html ? (
           <div
-            className="shiki-root"
-            style={{ padding: '1.25rem 1.5rem', fontSize: '1.4rem', lineHeight: '1.6', backgroundColor: '#24292e' }}
+            className={`shiki-root${showLineNumbers ? ' line-numbers' : ''}`}
+            style={{
+              padding: showLineNumbers ? '1.25rem 0' : '1.25rem 1.5rem',
+              fontSize: '1.4rem',
+              lineHeight: '1.6',
+              backgroundColor: '#24292e',
+            }}
             dangerouslySetInnerHTML={{ __html: html }}
           />
         ) : (

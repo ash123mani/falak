@@ -1,6 +1,7 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import { SyntaxHighlighter } from './syntax-highlighter'
+import { slugify, extractTextFromContent } from '@/lib/utils'
 import type { Document, Block, Inline } from '@contentful/rich-text-types'
 import type { ReactNode } from 'react'
 
@@ -93,15 +94,13 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
   return <SyntaxHighlighter language={language} code={code} />
 }
 
-function HeadingBox({ as: Tag, children }: { as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'; children: ReactNode }) {
-  const text = typeof children === 'string' ? children : ''
-  const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+function HeadingBox({ as: Tag, headingId, children }: { as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'; headingId: string; children: ReactNode }) {
   return (
-    <Tag id={id} className="group relative scroll-mt-24" style={{ margin: '3rem 0 1.5rem 0' }}>
-      <a href={`#${id}`} className="no-underline text-inherit">
-        <span className="absolute -left-6 opacity-0 group-hover:opacity-100 text-[var(--color-primary-light)] font-normal transition-opacity max-md:hidden">#</span>
-        {children}
+    <Tag id={headingId} className="group relative scroll-mt-24" style={{ margin: '3rem 0 1.5rem 0' }}>
+      <a href={`#${headingId}`} className="absolute -left-6 opacity-0 group-hover:opacity-100 text-[var(--color-primary-light)] font-normal transition-opacity max-md:hidden" aria-label={`Link to this section`}>
+        #
       </a>
+      {children}
     </Tag>
   )
 }
@@ -157,12 +156,12 @@ const options = {
         </p>
       )
     },
-    [BLOCKS.HEADING_1]: (_: any, children: ReactNode) => <HeadingBox as="h1">{children}</HeadingBox>,
-    [BLOCKS.HEADING_2]: (_: any, children: ReactNode) => <HeadingBox as="h2">{children}</HeadingBox>,
-    [BLOCKS.HEADING_3]: (_: any, children: ReactNode) => <HeadingBox as="h3">{children}</HeadingBox>,
-    [BLOCKS.HEADING_4]: (_: any, children: ReactNode) => <HeadingBox as="h4">{children}</HeadingBox>,
-    [BLOCKS.HEADING_5]: (_: any, children: ReactNode) => <HeadingBox as="h5">{children}</HeadingBox>,
-    [BLOCKS.HEADING_6]: (_: any, children: ReactNode) => <HeadingBox as="h6">{children}</HeadingBox>,
+    [BLOCKS.HEADING_1]: (node: any, children: ReactNode) => <HeadingBox as="h1" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
+    [BLOCKS.HEADING_2]: (node: any, children: ReactNode) => <HeadingBox as="h2" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
+    [BLOCKS.HEADING_3]: (node: any, children: ReactNode) => <HeadingBox as="h3" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
+    [BLOCKS.HEADING_4]: (node: any, children: ReactNode) => <HeadingBox as="h4" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
+    [BLOCKS.HEADING_5]: (node: any, children: ReactNode) => <HeadingBox as="h5" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
+    [BLOCKS.HEADING_6]: (node: any, children: ReactNode) => <HeadingBox as="h6" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
     [BLOCKS.OL_LIST]: (_: any, children: ReactNode) => <ol className="my-8 pl-8 space-y-2">{children}</ol>,
     [BLOCKS.UL_LIST]: (_: any, children: ReactNode) => <ul className="my-8 pl-8 space-y-2">{children}</ul>,
     [BLOCKS.LIST_ITEM]: (_: any, children: ReactNode) => (
@@ -178,7 +177,9 @@ const options = {
   renderText: (text: string) => {
     const trimmed = text.replace(/\n+$/, '')
     if (!trimmed) return text
-    return trimmed.split('\n').reduce((children: ReactNode[], textSegment: string, index: number) => {
+    const segments = trimmed.split('\n')
+    if (segments.length === 1) return segments[0]
+    return segments.reduce((children: ReactNode[], textSegment: string, index: number) => {
       return [...children, index > 0 && <br key={index} />, textSegment] as ReactNode[]
     }, [])
   },

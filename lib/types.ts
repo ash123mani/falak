@@ -1,5 +1,11 @@
 import type { Document } from '@contentful/rich-text-types'
 
+export interface TocItem {
+  id: string
+  text: string
+  level: number
+}
+
 export interface BlogPost {
   id: string
   slug: string
@@ -11,6 +17,7 @@ export interface BlogPost {
   excerpt: string
   seoTitle?: string
   seoDescription?: string
+  updatedDate?: string
 }
 
 export interface ContentfulAsset {

@@ -6,7 +6,8 @@ import GitalkComments from '@/components/gitalk-comments'
 import ShareButtons from '@/components/share-buttons'
 import ReadingProgress from '@/components/reading-progress'
 import BackToTop from '@/components/back-to-top'
-import { formatDateLong } from '@/lib/utils'
+import { TableOfContentsSidebar, TableOfContentsInline } from '@/components/table-of-contents'
+import { formatDateLong, extractHeadingsFromDocument } from '@/lib/utils'
 import type { Document } from '@contentful/rich-text-types'
 import type { Metadata } from 'next'
 
@@ -59,20 +60,42 @@ export default async function BlogPostPage({ params }: Props) {
   const bodyJson = post.body as Document
   const readingTime = calculateReadingTime(post.excerpt || '')
   const tags = (post.tags || '').split(' ').filter(Boolean)
+  const headings = extractHeadingsFromDocument(bodyJson)
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.seoTitle || post.title,
+    description: post.seoDescription || post.excerpt,
+    ...(post.heroImage?.url && { image: post.heroImage.url }),
+    datePublished: post.publishedDate,
+    dateModified: post.updatedDate || post.publishedDate,
+    author: {
+      '@type': 'Person',
+      name: 'Ashutosh Mani Tripathi',
+      url: 'https://github.com/ash123mani',
+    },
+  }
 
   return (
     <>
       <ReadingProgress />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article className="py-8 max-md:py-4">
-        <Link
-          href="/"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] no-underline transition-colors hover:text-[var(--link-color)]"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M10 12L6 8L10 4" />
-          </svg>
-          Back to Blog
-        </Link>
+        <div className="mx-auto mb-8 max-w-[75ch]">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] no-underline transition-colors hover:text-[var(--link-color)]"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10 12L6 8L10 4" />
+            </svg>
+            Back to Blog
+          </Link>
+        </div>
 
         <header className="mb-12 max-w-[75ch] mx-auto">
           <div className="flex flex-wrap gap-2 mb-4">
@@ -91,14 +114,34 @@ export default async function BlogPostPage({ params }: Props) {
           </h1>
 
           <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--color-primary-light)]">
-            <span>{formatDateLong(post.publishedDate)}</span>
+            <time dateTime={post.publishedDate}>{formatDateLong(post.publishedDate)}</time>
+            {post.updatedDate && post.updatedDate !== post.publishedDate && (
+              <>
+                <span className="w-1 h-1 rounded-full bg-[var(--color-primary-light)]" />
+                <span>Updated {formatDateLong(post.updatedDate)}</span>
+              </>
+            )}
             <span className="w-1 h-1 rounded-full bg-[var(--color-primary-light)]" />
             <span>{readingTime}</span>
           </div>
         </header>
 
+        <div className="xl:hidden max-w-[75ch] mx-auto">
+          <TableOfContentsInline items={headings} />
+        </div>
+
         <div className="mx-auto max-w-[75ch]">
-          <RichTextRenderer document={bodyJson} />
+          <div className="relative">
+            <RichTextRenderer document={bodyJson} />
+
+            {headings.length > 0 && (
+              <aside className="hidden xl:block absolute left-full ml-12 top-0 w-56">
+                <div className="sticky top-28">
+                  <TableOfContentsSidebar items={headings} />
+                </div>
+              </aside>
+            )}
+          </div>
         </div>
 
         <ShareButtons title={post.title} />
