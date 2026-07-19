@@ -15,7 +15,7 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light')
+  const [theme, setTheme] = useState<Theme>('dark')
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     if (stored) {
       setTheme(stored)
       document.documentElement.classList.toggle('dark', stored === 'dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    } else {
       setTheme('dark')
       document.documentElement.classList.add('dark')
     }
