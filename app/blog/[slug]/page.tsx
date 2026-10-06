@@ -62,8 +62,8 @@ export default async function BlogPostPage({ params }: Props) {
   const tags = (post.tags || '').split(' ').filter(Boolean)
   const headings = extractHeadingsFromDocument(bodyJson)
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
+  const jsonLd = {    '@context': 'https://schema.org',
+
     '@type': 'Article',
     headline: post.seoTitle || post.title,
     description: post.seoDescription || post.excerpt,

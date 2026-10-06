@@ -162,8 +162,8 @@ const options = {
     [BLOCKS.HEADING_4]: (node: any, children: ReactNode) => <HeadingBox as="h4" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
     [BLOCKS.HEADING_5]: (node: any, children: ReactNode) => <HeadingBox as="h5" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
     [BLOCKS.HEADING_6]: (node: any, children: ReactNode) => <HeadingBox as="h6" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
-    [BLOCKS.OL_LIST]: (_: any, children: ReactNode) => <ol className="my-8 pl-8 space-y-2">{children}</ol>,
-    [BLOCKS.UL_LIST]: (_: any, children: ReactNode) => <ul className="my-8 pl-8 space-y-2">{children}</ul>,
+    [BLOCKS.OL_LIST]: (_: any, children: ReactNode) => <ol className="my-8 pl-8 space-y-2 list-decimal [&>li]:marker:font-medium [&>li]:marker:text-[var(--color-primary-medium)]">{children}</ol>,
+    [BLOCKS.UL_LIST]: (_: any, children: ReactNode) => <ul className="my-8 pl-8 space-y-2 list-disc [&>li]:marker:text-[var(--color-primary-medium)]">{children}</ul>,
     [BLOCKS.LIST_ITEM]: (_: any, children: ReactNode) => (
       <li className="text-[1.7rem] leading-relaxed text-[var(--text-body)] marker:text-[var(--color-primary-medium)] max-md:text-[1.6rem]">{children}</li>
     ),
