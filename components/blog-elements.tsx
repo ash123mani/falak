@@ -96,7 +96,7 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
 
 function HeadingBox({ as: Tag, headingId, children }: { as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'; headingId: string; children: ReactNode }) {
   return (
-    <Tag id={headingId} className="group relative scroll-mt-24" style={{ margin: '3rem 0 1.5rem 0' }}>
+    <Tag id={headingId} className="group relative mt-12 mb-4 scroll-mt-24">
       <a href={`#${headingId}`} className="absolute -left-6 opacity-0 group-hover:opacity-100 text-[var(--color-primary-light)] font-normal transition-opacity max-md:hidden" aria-label={`Link to this section`}>
         #
       </a>
@@ -107,7 +107,7 @@ function HeadingBox({ as: Tag, headingId, children }: { as: 'h1' | 'h2' | 'h3' |
 
 function InlineCode({ children }: { children: ReactNode }) {
   return (
-    <code className="rounded-md bg-[#1e1e2e] px-1.5 py-0.5 font-mono text-[0.85em] text-[#e1e4e8] break-words">
+    <code className="rounded-md bg-[var(--code-inline-bg)] px-1.5 py-0.5 font-mono text-[0.85em] text-[var(--code-inline-text)] break-words">
       {children}
     </code>
   )
@@ -151,7 +151,7 @@ const options = {
       }
 
       return (
-        <p className="my-6 text-[1.7rem] leading-relaxed text-[var(--text-body)] max-md:text-[1.6rem] max-md:my-5">
+        <p className="mb-6 text-base leading-[1.75] text-[var(--text-body)] max-md:mb-5">
           {_children}
         </p>
       )
@@ -162,10 +162,10 @@ const options = {
     [BLOCKS.HEADING_4]: (node: any, children: ReactNode) => <HeadingBox as="h4" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
     [BLOCKS.HEADING_5]: (node: any, children: ReactNode) => <HeadingBox as="h5" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
     [BLOCKS.HEADING_6]: (node: any, children: ReactNode) => <HeadingBox as="h6" headingId={slugify(extractTextFromContent(node.content))}>{children}</HeadingBox>,
-    [BLOCKS.OL_LIST]: (_: any, children: ReactNode) => <ol className="my-8 pl-8 space-y-2 list-decimal [&>li]:marker:font-medium [&>li]:marker:text-[var(--color-primary-medium)]">{children}</ol>,
-    [BLOCKS.UL_LIST]: (_: any, children: ReactNode) => <ul className="my-8 pl-8 space-y-2 list-disc [&>li]:marker:text-[var(--color-primary-medium)]">{children}</ul>,
+    [BLOCKS.OL_LIST]: (_: any, children: ReactNode) => <ol className="mb-6 pl-6 space-y-2 list-decimal [&>li]:marker:font-medium [&>li]:marker:text-[var(--color-primary-medium)]">{children}</ol>,
+    [BLOCKS.UL_LIST]: (_: any, children: ReactNode) => <ul className="mb-6 pl-6 space-y-2 list-disc [&>li]:marker:text-[var(--color-primary-medium)]">{children}</ul>,
     [BLOCKS.LIST_ITEM]: (_: any, children: ReactNode) => (
-      <li className="text-[1.7rem] leading-relaxed text-[var(--text-body)] marker:text-[var(--color-primary-medium)] max-md:text-[1.6rem]">{children}</li>
+      <li className="text-base leading-[1.75] text-[var(--text-body)] marker:text-[var(--color-primary-medium)]">{children}</li>
     ),
     [BLOCKS.QUOTE]: (_: any, children: ReactNode) => (
       <blockquote className="my-8 border-l-[3px] border-[var(--blockquote-border)] bg-[var(--blockquote-bg)] py-4 px-6 italic rounded-r-xl">{children}</blockquote>

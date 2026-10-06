@@ -26,7 +26,7 @@ export default function GitalkComments() {
   }, [])
 
   return (
-    <section className="mx-auto mt-8 max-w-[75ch] pt-8 max-md:max-w-full">
+    <section className="mx-auto mt-8 max-w-[70ch] pt-8 max-md:max-w-full">
       <div ref={containerRef} id="gitalk-container" />
     </section>
   )

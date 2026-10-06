@@ -40,7 +40,7 @@ export default function BlogCard({
         </div>
         <div className="flex items-center justify-between border-t border-[var(--border-color)] pt-4">
           <span className="flex items-center gap-1.5 text-xs font-medium text-[var(--color-primary-light)]">
-            <FiCalendar size={12} />
+            <FiCalendar size={14} />
             {publishDate}
           </span>
           {tag && (

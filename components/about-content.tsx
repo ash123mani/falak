@@ -22,7 +22,7 @@ export default function AboutContent({
   return (
     <div className="py-8 max-md:py-4">
       <FadeInView>
-        <h1 className="m-0 text-[3.6rem] font-extrabold leading-tight tracking-tight max-md:text-[2.4rem]">
+        <h1 className="m-0 text-[3.9rem] font-bold leading-tight tracking-tight max-md:text-[3rem]">
           About
         </h1>
         <p className="mt-2 text-base text-[var(--text-secondary)] max-md:text-sm">
@@ -30,7 +30,7 @@ export default function AboutContent({
         </p>
       </FadeInView>
 
-      <section className="mt-10 max-w-[75ch]">
+      <section className="mt-10 max-w-[70ch]">
         <FadeInView>
           <RichTextRenderer document={about.mySummary} />
         </FadeInView>

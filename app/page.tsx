@@ -14,7 +14,7 @@ export default async function HomePage() {
   return (
     <div className="py-8 max-md:py-4">
       <div className="mb-10 max-md:mb-6">
-        <h1 className="m-0 text-[3.6rem] font-extrabold leading-tight tracking-tight max-md:text-[2.4rem]">
+        <h1 className="m-0 text-[3.9rem] font-bold leading-tight tracking-tight max-md:text-[3rem]">
           Blog
         </h1>
         <p className="mt-2 text-base text-[var(--text-secondary)] max-md:text-sm">

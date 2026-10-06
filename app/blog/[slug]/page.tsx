@@ -85,68 +85,74 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <article className="py-8 max-md:py-4">
-        <div className="mx-auto mb-8 max-w-[75ch]">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] no-underline transition-colors hover:text-[var(--link-color)]"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M10 12L6 8L10 4" />
-            </svg>
-            Back to Blog
-          </Link>
-        </div>
-
-        <header className="mb-12 max-w-[75ch] mx-auto">
-          <div className="flex flex-wrap gap-2 mb-4">
-            {tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-[var(--tag-bg)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]"
+        <div
+          className={`mx-auto max-w-[70ch] ${
+            headings.length > 0
+              ? 'xl:max-w-none xl:grid xl:grid-cols-[minmax(0,70ch)_224px] xl:items-stretch xl:justify-center xl:gap-12'
+              : ''
+          }`}
+        >
+          <div className="min-w-0">
+            <div className="mb-8">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] no-underline transition-colors hover:text-[var(--link-color)]"
               >
-                {tag}
-              </span>
-            ))}
-          </div>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M10 12L6 8L10 4" />
+                </svg>
+                Back to Blog
+              </Link>
+            </div>
 
-          <h1 className="m-0 mb-4 text-[3.6rem] font-bold leading-tight tracking-tight max-md:text-[2.4rem]">
-            {post.title}
-          </h1>
+            <header className="mb-12">
+              <div className="flex flex-wrap gap-2 mb-4">
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full bg-[var(--tag-bg)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
 
-          <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--color-primary-light)]">
-            <time dateTime={post.publishedDate}>{formatDateLong(post.publishedDate)}</time>
-            {post.updatedDate && post.updatedDate !== post.publishedDate && (
-              <>
+              <h1 className="m-0 mb-4 text-[3.9rem] font-bold leading-tight tracking-tight max-md:text-[3rem]">
+                {post.title}
+              </h1>
+
+              <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--color-primary-light)]">
+                <time dateTime={post.publishedDate}>{formatDateLong(post.publishedDate)}</time>
+                {post.updatedDate && post.updatedDate !== post.publishedDate && (
+                  <>
+                    <span className="w-1 h-1 rounded-full bg-[var(--color-primary-light)]" />
+                    <span>Updated {formatDateLong(post.updatedDate)}</span>
+                  </>
+                )}
                 <span className="w-1 h-1 rounded-full bg-[var(--color-primary-light)]" />
-                <span>Updated {formatDateLong(post.updatedDate)}</span>
-              </>
-            )}
-            <span className="w-1 h-1 rounded-full bg-[var(--color-primary-light)]" />
-            <span>{readingTime}</span>
-          </div>
-        </header>
+                <span>{readingTime}</span>
+              </div>
+            </header>
 
-        <div className="xl:hidden max-w-[75ch] mx-auto">
-          <TableOfContentsInline items={headings} />
-        </div>
+            <div className="xl:hidden">
+              <TableOfContentsInline items={headings} />
+            </div>
 
-        <div className="mx-auto max-w-[75ch]">
-          <div className="relative">
             <RichTextRenderer document={bodyJson} />
 
-            {headings.length > 0 && (
-              <aside className="hidden xl:block absolute left-full ml-12 top-0 w-56">
-                <div className="sticky top-28">
-                  <TableOfContentsSidebar items={headings} />
-                </div>
-              </aside>
-            )}
+            <ShareButtons title={post.title} />
+
+            <GitalkComments />
           </div>
+
+          {headings.length > 0 && (
+            <aside className="hidden xl:block">
+              <div className="sticky top-28 max-h-[calc(100vh-9rem)] overflow-y-auto">
+                <TableOfContentsSidebar items={headings} />
+              </div>
+            </aside>
+          )}
         </div>
-
-        <ShareButtons title={post.title} />
-
-        <GitalkComments />
       </article>
       <BackToTop />
     </>

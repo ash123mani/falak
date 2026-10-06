@@ -17,7 +17,7 @@ export default function ShareButtons({ title }: { title: string }) {
   }
 
   return (
-    <div className="mx-auto mt-12 flex max-w-[75ch] flex-col items-center gap-4 border-t border-[var(--border-color)] pt-8">
+    <div className="mx-auto mt-12 flex max-w-[70ch] flex-col items-center gap-4 border-t border-[var(--border-color)] pt-8">
       <span className="text-sm font-medium text-[var(--text-secondary)]">Share this post</span>
       <div className="flex items-center gap-2">
         <button

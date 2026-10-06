@@ -36,7 +36,7 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
-                className={`rounded-lg px-5 py-2.5 text-[1.5rem] font-medium no-underline transition-all duration-200 ${
+                className={`rounded-lg px-5 py-2.5 text-base font-medium no-underline transition-all duration-200 ${
                   isActive
                     ? 'bg-[var(--button-background)] text-[var(--page-bg)]'
                     : 'text-[var(--text-secondary)] hover:bg-[var(--tag-bg)] hover:text-[var(--color-primary)]'
