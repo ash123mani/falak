@@ -49,7 +49,7 @@ export default function BlogFilters({ tags }: { tags: string[] }) {
           placeholder="Search posts..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="w-full rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] py-3 pl-11 pr-4 text-sm text-[var(--color-primary)] placeholder:text-[var(--color-primary-light)] transition-colors focus:border-[var(--link-color)] focus:outline-none"
+          className="w-full rounded-xl border border-[var(--border-control)] bg-[var(--card-bg)] py-3 pl-11 pr-4 text-sm text-[var(--color-primary)] placeholder:text-[var(--color-primary-light)] transition-colors focus:border-[var(--link-color)]"
         />
       </div>
 
@@ -60,7 +60,7 @@ export default function BlogFilters({ tags }: { tags: string[] }) {
             className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-all ${
               !currentTag
                 ? 'bg-[var(--button-background)] text-[var(--page-bg)]'
-                : 'border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--border-color-bold)]'
+                : 'border border-[var(--border-control)] text-[var(--text-secondary)] hover:border-[var(--color-primary-light)]'
             }`}
           >
             All
@@ -72,7 +72,7 @@ export default function BlogFilters({ tags }: { tags: string[] }) {
               className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-all ${
                 tag === currentTag
                   ? 'bg-[var(--button-background)] text-[var(--page-bg)]'
-                  : 'border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--border-color-bold)]'
+                  : 'border border-[var(--border-control)] text-[var(--text-secondary)] hover:border-[var(--color-primary-light)]'
               }`}
             >
               {tag}
@@ -80,7 +80,7 @@ export default function BlogFilters({ tags }: { tags: string[] }) {
           ))}
         </div>
 
-        <div className="flex items-center gap-1 rounded-lg border border-[var(--border-color)] p-1 max-md:hidden">
+        <div className="flex items-center gap-1 rounded-lg border border-[var(--border-control)] p-1 max-md:hidden">
           <button
             onClick={() => setParam('view', 'grid')}
             className={`rounded-md p-2 transition-colors ${

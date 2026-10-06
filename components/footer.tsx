@@ -48,7 +48,7 @@ export default function Footer() {
               <div className="flex gap-3">
                 <a
                   href="mailto:copycutsave@gmail.com"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border-color)] text-[var(--text-secondary)] transition-all hover:border-[var(--link-color)] hover:text-[var(--link-color)]"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border-control)] text-[var(--text-secondary)] transition-all hover:border-[var(--link-color)] hover:text-[var(--link-color)]"
                   aria-label="Email"
                 >
                   <FiMail size={16} />

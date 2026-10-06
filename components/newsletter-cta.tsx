@@ -41,7 +41,7 @@ export default function NewsletterCta() {
             placeholder="you@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="min-w-0 flex-1 rounded-xl border border-[var(--border-color)] bg-[var(--page-bg)] px-4 py-2.5 text-sm text-[var(--color-primary)] placeholder:text-[var(--color-primary-light)] transition-colors focus:border-[var(--link-color)] focus:outline-none"
+            className="min-w-0 flex-1 rounded-xl border border-[var(--border-control)] bg-[var(--page-bg)] px-4 py-2.5 text-sm text-[var(--color-primary)] placeholder:text-[var(--color-primary-light)] transition-colors focus:border-[var(--link-color)]"
           />
           <button
             type="submit"

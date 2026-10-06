@@ -58,14 +58,14 @@ export default function Header() {
         <div className="hidden max-md:flex items-center gap-2">
           <button
             onClick={toggleTheme}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-color)] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-color-bold)] hover:text-[var(--color-primary)]"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-control)] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-color-bold)] hover:text-[var(--color-primary)]"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? <FiSun size={16} /> : <FiMoon size={16} />}
           </button>
           <button
             onClick={() => setMenuOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--border-color-bold)] hover:text-[var(--color-primary)]"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-control)] text-[var(--text-secondary)] hover:border-[var(--border-color-bold)] hover:text-[var(--color-primary)]"
             aria-label="Open menu"
           >
             <HiMenu size={20} />
@@ -93,7 +93,7 @@ export default function Header() {
               <div className="flex justify-end mb-8">
                 <button
                   onClick={() => setMenuOpen(false)}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--color-primary)]"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-control)] text-[var(--text-secondary)] hover:text-[var(--color-primary)]"
                 >
                   <HiX size={20} />
                 </button>

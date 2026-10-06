@@ -27,7 +27,7 @@ export default function ShareButtons({ title }: { title: string }) {
               '_blank'
             )
           }
-          className="flex items-center gap-2 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] px-4 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition-all hover:-translate-y-0.5 hover:border-sky-500 hover:text-sky-500 hover:shadow-md"
+          className="flex items-center gap-2 rounded-xl border border-[var(--border-control)] bg-[var(--card-bg)] px-4 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition-all hover:-translate-y-0.5 hover:border-sky-700 hover:text-sky-700 hover:shadow-md"
         >
           <FiTwitter size={16} />
           Twitter
@@ -36,14 +36,14 @@ export default function ShareButtons({ title }: { title: string }) {
           onClick={() =>
             window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`, '_blank')
           }
-          className="flex items-center gap-2 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] px-4 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition-all hover:-translate-y-0.5 hover:border-blue-700 hover:text-blue-700 hover:shadow-md"
+          className="flex items-center gap-2 rounded-xl border border-[var(--border-control)] bg-[var(--card-bg)] px-4 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition-all hover:-translate-y-0.5 hover:border-blue-700 hover:text-blue-700 hover:shadow-md"
         >
           <FiLinkedin size={16} />
           LinkedIn
         </button>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-2 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] px-4 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition-all hover:-translate-y-0.5 hover:border-[var(--link-color)] hover:text-[var(--link-color)] hover:shadow-md"
+          className="flex items-center gap-2 rounded-xl border border-[var(--border-control)] bg-[var(--card-bg)] px-4 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition-all hover:-translate-y-0.5 hover:border-[var(--link-color)] hover:text-[var(--link-color)] hover:shadow-md"
         >
           <FiLink size={16} />
           {copied ? 'Copied!' : 'Copy Link'}

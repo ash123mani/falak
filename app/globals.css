@@ -14,6 +14,7 @@
   --blockquote-bg: #f0f6ff;
   --border-color: #e4e4e7;
   --border-color-bold: #d4d4d8;
+  --border-control: #8b8b93;
   --button-background: #0a0a0a;
   --page-bg: #fafafa;
   --card-bg: #ffffff;
@@ -37,6 +38,7 @@
   --blockquote-bg: #0f172a;
   --border-color: #1e293b;
   --border-color-bold: #334155;
+  --border-control: #64748b;
   --button-background: #f1f5f9;
   --page-bg: #0b0b0f;
   --card-bg: #12121a;
@@ -177,6 +179,11 @@ a:hover {
   color: var(--link-hover);
 }
 
+:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
 @media screen and (max-width: 768px) {
   h1 { font-size: 3rem; }
   h2 { font-size: 2.4rem; }
@@ -212,7 +219,7 @@ a:hover {
   min-width: 3.2rem;
   text-align: right;
   margin-right: 1.2rem;
-  color: #636d83;
+  color: #8b949e;
   font-size: 1.2rem;
   user-select: none;
 }

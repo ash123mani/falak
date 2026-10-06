@@ -62,6 +62,9 @@ export function SyntaxHighlighter({
       const result = hl.codeToHtml(code, {
         lang: normalizedLang,
         theme: 'github-dark',
+        colorReplacements: {
+          '#6a737d': '#959da5',
+        },
       })
       setHtml(result)
     })
