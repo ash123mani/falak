@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next'
 
 export const dynamic = 'force-static'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://falak.dev'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://falak.netlify.app'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllBlogPosts()
